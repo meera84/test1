@@ -4,16 +4,16 @@
       
     </div>
     <div class="col-md-auto">
-    
+    {{#each bookreview}}
         
-        <h1>{{bookreview.book_title}}</h1>
-        <p><em>by {{bookreview.book_author}}</em></p>
-        <p>Reviewer: {{bookreview.byline}}</p>
-        <p>Date: {{bookreview.publication_dt}}</p>
-        <p>{{bookreview.summary}}</p>
-        <p class="right"><a href="{{bookreview.url}}" target="__blank"> Full Review</a>        </p>
+        <h1>{{this.book_title}}</h1>
+        <p><em>by {{this.book_author}}</em></p>
+        <p>Reviewer: {{this.byline}}</p>
+        <p>Date: {{this.publication_dt}}</p>
+        <p>{{this.summary}}</p>
+        <p class="right"><a href="{{this.url}}" target="__blank"> Full Review</a>        </p>
     </div>
-       
+       {{/each}}
      
     
    
