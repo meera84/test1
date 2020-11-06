@@ -88,6 +88,34 @@ module.exports = function(p) {
             const result = await conn.query(SQL_GET_BOOK_DETAILS, [book_id])
             console.log(result[0])
             const a1=result[0]
+            
+
+            resp.format({
+                'text/html': () => {
+                    resp.type('text/html')
+                    resp.render('details', { book: a1[0] })
+                },
+                'application/json': () => {
+                    resp.type('application/json')
+                    resp.json(a1[0])
+                },
+                'default': () => {
+                    resp.type('text/plain')
+                    resp.send(JSON.stringify(a1[0]))
+                }
+            })
+    
+        } catch(e) {
+            resp.status(500)
+            resp.type('text/html')
+            resp.send(JSON.stringify(e))
+        } finally {
+            conn.release()
+        }
+    
+
+
+            /*
             resp.status(200)
             resp.type('text/html')
             resp.render('details', {book:a1[0]}
@@ -99,7 +127,7 @@ module.exports = function(p) {
             resp.end()
         } finally {
             conn.release()
-        }
+        }*/
     })
 
 

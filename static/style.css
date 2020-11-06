@@ -33,3 +33,9 @@
 .h2text {
     text-align: center;
 }
+
+.mid1 {
+    justify-content: center;
+    text-align: right;
+    padding-bottom: 40px;
+}
