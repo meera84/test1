@@ -9,7 +9,7 @@ const withQuery = require('with-query').default
 const SQL_GET_BOOKS = 'select distinct left(title,1) as letter from book2018 order by letter ASC';
 const SQL_GET_BOOKS_LETTERS = 'select book_id ,title from book2018 where title like ? limit ? offset ?';
 const SQL_GET_BOOK_DETAILS = 'select * from book2018 where book_id = ?';
-const SQL_LIST_OF_BOOKS_PER_LETTER = 'select count(*) from book2018 where title like ?';
+const SQL_LIST_OF_BOOKS_PER_LETTER = 'select count(*) as totalnum from book2018 where title like ?';
 
 
 module.exports = function(p) {
@@ -57,7 +57,7 @@ module.exports = function(p) {
         try {
             const results = await conn.query(SQL_GET_BOOKS_LETTERS, [`${q}%`,limit,offset ])
             const totalNum = await conn.query(SQL_LIST_OF_BOOKS_PER_LETTER, [`${q}%`])
-            console (`total num = `,totalNum)
+            const totallist= totalNum[0][0].totalnum
             resp.status(200)
             resp.type('text/html')
             console.log(results[0])
