@@ -9,7 +9,7 @@ const withQuery = require('with-query').default
 const SQL_GET_BOOKS = 'select distinct left(title,1) as letter from book2018 order by letter ASC';
 const SQL_GET_BOOKS_LETTERS = 'select book_id ,title from book2018 where title like ? limit ? offset ?';
 const SQL_GET_BOOK_DETAILS = 'select * from book2018 where book_id = ?';
-//const SQL_GET_APP_BY_APPID = 'select * from apps where app_id = ?'
+
 
 module.exports = function(p) {
 
@@ -88,12 +88,16 @@ module.exports = function(p) {
             const result = await conn.query(SQL_GET_BOOK_DETAILS, [book_id])
             console.log(result[0])
             const a1=result[0]
+            const genres = a1[0].genres.split('|')
+            const author = a1[0].authors.split('|')
+            
+            console.log(genres)
             
 
             resp.format({
                 'text/html': () => {
                     resp.type('text/html')
-                    resp.render('details', { book: a1[0] })
+                    resp.render('details', { book: a1[0],genres,author })
                 },
                 'application/json': () => {
                     resp.type('application/json')
@@ -134,8 +138,8 @@ module.exports = function(p) {
     //getting the details of the selected book
     router.get('/findreview', async (req, resp) => {
         const ENDPOINT = 'https://api.nytimes.com/svc/books/v3/reviews.json'
-        const Public_API_KEY = '16eO1McHTkQytK0Rfbzk2IlkRGCKiVPw'
-        const Private_API_KEY = '9rcTcAiRIfxj89bi'
+        const Public_API_KEY = process.env.API_KEY
+       
         const title=req.query['title']
         console.log(title)
         
@@ -168,74 +172,6 @@ module.exports = function(p) {
     })
 
    
-
-     //hasSite: !!result[0].official_site  (Removed this for a while)
-    
-
-    /*
-
-    router.get('/app/:appId', async (req, resp) => {
-        const appId = req.params['appId']
-
-        const conn = await pool.getConnection()
-
-        try {
-            const results = await conn.query(SQL_GET_APP_BY_APPID, [ appId ])
-            const recs = results[0]
-
-            if (recs.length <= 0) {
-                //404!
-                resp.status(404)
-                resp.type('text/html')
-                resp.send(`Not found: ${appId}`)
-                return
-            }
-
-            resp.status(200)
-            resp.format({
-                'text/html': () => {
-                    resp.type('text/html')
-                    resp.render('app', { app: recs[0] })
-                },
-                'application/json': () => {
-                    resp.type('application/json')
-                    resp.json(recs[0])
-                },
-                'default': () => {
-                    resp.type('text/plain')
-                    resp.send(JSON.stringify(recs[0]))
-                }
-            })
-
-        } catch(e) {
-            resp.status(500)
-            resp.type('text/html')
-            resp.send(JSON.stringify(e))
-        } finally {
-            conn.release()
-        }
-    })
-
-    router.get('/category', async (req, resp) => {
-
-        const conn = await pool.getConnection()
-
-        try {
-            const results = await conn.query(SQL_GET_APP_CATEGORIES)
-            const cats = results[0].map(v => v.category)
-
-            resp.status(200)
-            resp.type('text/html')
-            resp.render('index', { category: cats })
-
-        } catch(e) {
-            resp.status(500)
-            resp.type('text/html')
-            resp.send(JSON.stringify(e))
-        } finally {
-            conn.release()
-        }
-    })*/
 
     return (router)
 }

@@ -7,13 +7,13 @@
                 <td>Pages: {{book.pages}}</td>                
             </tr>
             <tr><td>Rating: {{book.rating}} ({{book.review_count}})</td></tr>
-            <tr><td>Genres: {{book.genres}}</td></tr>
+            <tr><td>Genres: {{genres}}</td></tr>
         </table>
 
     </div>
     <div class="col">
       <h3>{{book.title}}</h3>
-      <p class="author"><em>by {{book.authors}}</em></p>
+      <p class="author"><em>by {{author}}</em></p>
       <p class="desc"> {{book.description}}</p>
       
 <form method="GET" action="/findreview">

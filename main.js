@@ -4,6 +4,7 @@ const handlebars = require('express-handlebars')
 const mysql = require('mysql2/promise')
 const fetch = require('node-fetch')
 const withQuery = require('with-query').default
+var morgan = require('morgan')
 
 const r = require('./books')
 
@@ -26,6 +27,9 @@ const router = require('./books')(pool)
 // create express
 const app = express()
 
+//create morgan
+app.use(morgan('combined'))
+ 
 // configure handlebars
 app.engine('hbs', handlebars({ defaultLayout: 'default.hbs' }))
 app.set('view engine', 'hbs')

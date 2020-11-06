@@ -31,15 +31,18 @@
                         <input type="hidden" name="offset" value={{ prevOffset }}>
                         <button type="submit" class="btn btn-primary">Previous</button>
                     </form>
+                  
     </div>
         
         
     <div class="col">
+    
       <form method="GET" action="/books/{{q}}">
                         <input type="hidden" name="q" value="{{ q }}">
                         <input type="hidden" name="offset" value={{ nextOffset }}>
                         <button type="submit" class="btn btn-primary">Next</button>
                     </form>
+           
     </div>
   </div>
 
