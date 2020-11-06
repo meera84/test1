@@ -65,7 +65,9 @@ module.exports = function(p) {
                 letters: results[0], 
                 q,
                 prevOffset: Math.max(0, offset - limit),
-                nextOffset: offset + limit})
+                nextOffset: offset + limit,
+                endnum: totallist/limit
+            })
 
         } catch(e) {
             console.error('ERROR: ', e)
