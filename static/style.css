@@ -4,3 +4,32 @@
     margin: 10px;
     
 }
+
+.author {
+
+}
+
+.img1{
+    width: 400px;
+    padding-bottom: 20px;
+}
+
+.review {
+    text-decoration: underline;
+}
+
+.desc {
+    padding-bottom: 50px;
+}
+
+.right {
+    text-align: right;
+}
+
+.copyright {
+    font-size: 0.8em;
+    text-align: center;
+}
+.h2text {
+    text-align: center;
+}

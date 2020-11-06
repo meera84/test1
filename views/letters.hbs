@@ -1,49 +1,50 @@
-<div class="row">
+<div class="container-fluid">
+    <div class="row">
 	<div class="col-4 d-flex justify-content-center">
         
     
-   <h2>Letter {{q}}</h2>
-
-<ul>
+   <h2>Letter {{q}}</h2></div></div>
+<div class="row">
+	<div class="col-4 d-flex justify-content-center">
+<ul style="list-style-type:none" >
     {{#each letters}}
+    
         <li>
-    		<a href="/books/{{this.book_id}}" target="_blank">
+            <a href="/books/{{../q}}/{{this.book_id}}">
             {{ this.title }}
             </a>
         </li>
     {{/each}}
 
 </ul>
-<!--
 
-     <div>
-          <form method="GET" action="/books/{{q}}">
+</div></div></div>
+
+<!--navigation buttons-->
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+        
+      <form method="GET" action="/books/{{q}}">
                         <input type="hidden" name="q" value="{{ q }}">
                         <input type="hidden" name="offset" value={{ prevOffset }}>
                         <button type="submit">Previous</button>
-
-     </div>
-    <div>
+                    </form>
+    </div>
+        
+        
+    <div class="col">
       <form method="GET" action="/books/{{q}}">
                         <input type="hidden" name="q" value="{{ q }}">
                         <input type="hidden" name="offset" value={{ nextOffset }}>
                         <button type="submit">Next</button>
                     </form>
     </div>
--->
+  </div>
 
-<!--
-		<div class="d-flex justify-content-between">
-			<a class="btn btn-sm btn-warning" href="/">
-				<i class="fas fa-home mr-1"></i>
-				Back
-			</a>
-           
-			{{#if hasSite}}
-				<a class="btn btn-sm btn-primary" href="{{ show.official_site }}" target="_blank">
-				<i class="fas fa-paper-plane mr-1"></i>
-					Official Site
-				</a>
-			{{/if}} -->
+ 
+
+
 		</div>
 	</div>
